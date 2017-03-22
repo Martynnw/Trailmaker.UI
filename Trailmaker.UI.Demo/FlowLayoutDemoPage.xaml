@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage	xmlns="http://xamarin.com/schemas/2014/forms" 
+				xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+				xmlns:ui="clr-namespace:Trailmaker.UI;assembly=Trailmaker.UI"
+				x:Class="Trailmaker.UI.Demo.FlowLayoutDemoPage">
+	<ContentPage.Content>
+		<ScrollView Padding="5">
+			<StackLayout>
+
+				<StackLayout Orientation="Horizontal">
+					<Label Text="Spacing" FontSize="Small" VerticalOptions="Center" />
+					<Label BindingContext="{x:Reference Name=SpacingStepper}" Text="{Binding Value}" FontSize="Small" VerticalOptions="Center" />
+					<Stepper x:Name="SpacingStepper" Minimum="0" Maximum="20" Value="5" ValueChanged="Spacing_ValueChanged" HorizontalOptions="EndAndExpand" />
+
+				</StackLayout>
+
+				<StackLayout Orientation="Horizontal">
+					<Label Text="Padding" FontSize="Small" VerticalOptions="Center" />
+					<Label BindingContext="{x:Reference Name=PaddingStepper}" Text="{Binding Value}" FontSize="Small" VerticalOptions="Center" />
+					<Stepper x:Name="PaddingStepper" Minimum="0" Maximum="20" Value="5" ValueChanged="Padding_ValueChanged" HorizontalOptions="EndAndExpand" />
+				</StackLayout>
+
+				<StackLayout Orientation="Horizontal">
+					<Button Text="Resize Child" Clicked="ResizeChild_Clicked" HorizontalOptions="FillAndExpand" />
+					<Button Text="Hide Child" Clicked="HideChild_Clicked" HorizontalOptions="FillAndExpand" />
+				</StackLayout>
+				
+				<ui:FlowLayout x:Name="FlowLayout1" Padding="5" Spacing="5" BackgroundColor="Silver"/>
+			</StackLayout>
+		</ScrollView>
+	</ContentPage.Content>
+</ContentPage>
