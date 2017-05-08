@@ -8,7 +8,7 @@ namespace Trailmaker.UI.Demo
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new FlowLayoutDemoPage());
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()
