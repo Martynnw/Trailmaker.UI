@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Trailmaker.UI.ToolbarMenuPage" >
+	<ContentPage.Content>
+        <TableView Intent="Menu">
+            <TableView.Root>
+                <TableSection x:Name="OptionSection">
+                </TableSection>
+                <TableSection>
+                    <TextCell Text="Cancel" Tapped="Cancel_Tapped" />
+                </TableSection>
+            </TableView.Root>
+        </TableView>
+	</ContentPage.Content>
+</ContentPage>

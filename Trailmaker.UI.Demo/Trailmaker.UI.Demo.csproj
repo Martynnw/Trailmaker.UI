@@ -32,6 +32,9 @@
     <EmbeddedResource Include="FlowLayoutDemoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolbarDemoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -46,6 +49,9 @@
     </Compile>
     <Compile Include="RepeaterDemoPage.xaml.cs">
       <DependentUpon>RepeaterDemoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToolbarDemoPage.xaml.cs">
+      <DependentUpon>ToolbarDemoPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

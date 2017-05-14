@@ -31,6 +31,15 @@
     <Compile Include="Repeater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FlowLayout.cs" />
+    <Compile Include="ToolBar.xaml.cs">
+      <DependentUpon>ToolBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Images\ImageId.cs">
+      <LogicalName>Images.BackLight.png</LogicalName>
+    </Compile>
+    <Compile Include="ToolbarMenuPage.xaml.cs">
+      <DependentUpon>ToolbarMenuPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -45,6 +54,29 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ToolBar.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\HamburgerDark.png">
+      <LogicalName>Images.HamburgerDark.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\HamburgerLight.png">
+      <LogicalName>Images.HamburgerLight.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\BackLight.png">
+      <LogicalName>Images.BackLight.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\BackDark.png">
+      <LogicalName>Images.BackDark</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolbarMenuPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Trailmaker.UI.ToolBar" BackgroundColor="#3F51B5">
+	<ContentView.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                
+                <Image  x:Name="BackImage" 
+                        Aspect="AspectFit" 
+                        VerticalOptions="Center" 
+                        HeightRequest="40" 
+                        WidthRequest="40" />
+
+                <Label  x:Name="TitleLabel"
+                        Text="Title" 
+                        HorizontalOptions="FillAndExpand" 
+                        HorizontalTextAlignment="Center" 
+                        FontSize="Large" 
+                        FontAttributes="Bold" 
+                        TextColor="#FFFFFF" 
+                        VerticalOptions="Center" />
+
+                <Image  x:Name="MenuImage" 
+                        Aspect="AspectFit" 
+                        VerticalOptions="Center" 
+                        HeightRequest="40" 
+                        WidthRequest="40">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MenuImage_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+                </StackLayout.Padding>
+
+            </StackLayout>
+        </StackLayout>
+	</ContentView.Content>
+</ContentView>
