@@ -27,59 +27,59 @@ namespace Trailmaker.UI
             set { this.SetValue(ItemsSourceProperty, value); }
         }
 
-        private static void ItemsSourceChanging(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (oldValue != null && oldValue is INotifyCollectionChanged)
-            {
-                ((INotifyCollectionChanged)oldValue).CollectionChanged -= ((Repeater)bindable).OnCollectionChanged;
-            }
+		private static void ItemsSourceChanging(BindableObject bindable, object oldValue, object newValue)
+		{
+		    if (oldValue != null && oldValue is INotifyCollectionChanged)
+		    {
+		        ((INotifyCollectionChanged)oldValue).CollectionChanged -= ((Repeater)bindable).OnCollectionChanged;
+		    }
 
-            if (newValue != null && newValue is INotifyCollectionChanged)
-            {
-                ((INotifyCollectionChanged)newValue).CollectionChanged += ((Repeater)bindable).OnCollectionChanged;
-            }
-        }
+		    if (newValue != null && newValue is INotifyCollectionChanged)
+		    {
+		        ((INotifyCollectionChanged)newValue).CollectionChanged += ((Repeater)bindable).OnCollectionChanged;
+		    }
+		}
 
-        protected override void OnPropertyChanged(string propertyName = null)
-        {
-            base.OnPropertyChanged(propertyName);
+		private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+		{
+			Populate();
+		}
 
-            if (propertyName == ItemTemplateProperty.PropertyName || propertyName == ItemsSourceProperty.PropertyName)
-            {
-                this.Populate();
-            }
-        }
+		protected override void OnPropertyChanged(string propertyName = null)
+		{
+		    base.OnPropertyChanged(propertyName);
 
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
-        {
-            Populate();
-        }
+		    if (propertyName == ItemTemplateProperty.PropertyName || propertyName == ItemsSourceProperty.PropertyName)
+		    {
+		        this.Populate();
+		    }
+		}
 
-        protected override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
-            this.Populate();
-        }
+		protected override void OnBindingContextChanged()
+		{
+		    base.OnBindingContextChanged();
+		    this.Populate();
+		}
 
-        public void Populate()
-        {
-            if (this.ItemsSource != null)
-            {
-                this.Children.Clear();
+		public void Populate()
+		{
+		    if (this.ItemsSource != null)
+		    {
+		        this.Children.Clear();
 
-                foreach (var item in this.ItemsSource)
-                {
-                    var content = this.ItemTemplate.CreateContent();
-                    var viewCell = content as ViewCell;
+		        foreach (var item in this.ItemsSource)
+		        {
+		            var content = this.ItemTemplate.CreateContent();
+		            var viewCell = content as ViewCell;
 
 
-                    if (viewCell != null)
-                    {
-                        this.Children.Add(viewCell.View);
-                        viewCell.BindingContext = item;
-                    }
-                }
-            }
-        }
+		            if (viewCell != null)
+		            {
+		                this.Children.Add(viewCell.View);
+		                viewCell.BindingContext = item;
+		            }
+		        }
+		    }
+		}
     }
 }
