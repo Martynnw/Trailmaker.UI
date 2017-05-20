@@ -25,6 +25,7 @@ namespace Trailmaker.UI.Demo
 
             items.Add(new MenuItem("Flow Layout", "", typeof(FlowLayoutDemoPage)));
             items.Add(new MenuItem("Repeater", "", typeof(RepeaterDemoPage)));
+            items.Add(new MenuItem("Walkthrough", "", typeof(Walkthrough.WalkthroughDemoPage)));
 
             return items;
         }

@@ -123,6 +123,10 @@
       <Project>{D37BC9A8-E321-499B-93B6-6395673BBBCF}</Project>
       <Name>Trailmaker.UI.Demo</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Trailmaker.UI\Trailmaker.UI.csproj">
+      <Project>{3F2257BA-4467-4233-81E3-A4442B154A70}</Project>
+      <Name>Trailmaker.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
