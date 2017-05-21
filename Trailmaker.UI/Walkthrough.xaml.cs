@@ -6,24 +6,28 @@ using Xamarin.Forms;
 namespace Trailmaker.UI
 {
     [ContentProperty("Pages")]
-    public partial class Walkthrough : ContentView
+    public partial class Walkthrough : ContentView, WalkthroughController.IWalkthroughView
     {
+        private WalkthroughController controller;
         private double panX;
-        private bool pageIsChanging = false;
+        private bool userShowBack = true;
+        private bool userShowNext = true;
 
         public Walkthrough()
         {
             InitializeComponent();
             ProgressMarker = ImageSource.FromResource("Trailmaker.UI.Images.circlefull.png");
             PagesLayout.SizeChanged += (sender, e) => { PositionPages(); };
+            controller = new WalkthroughController(this, new List<View> { });
+            ShowControls();
         }
 
         public event EventHandler PageChanged;
 
         public bool ShowBack
         {
-            get { return LabelBack.IsVisible; }
-            set { LabelBack.IsVisible = value ; }
+            get { return userShowBack; }
+            set { userShowBack = value; }
         }
 
         public string BackText
@@ -34,11 +38,11 @@ namespace Trailmaker.UI
 
         public bool ShowNext
         {
-            get { return LabelNext.IsVisible; }
-            set { LabelNext.IsVisible = value; }
+            get { return userShowNext; }
+            set { userShowNext = value; }
         }
 
-        public Thickness ControlsPadding 
+        public Thickness ControlsPadding
         {
             get { return ControlsLayout.Padding; }
             set { ControlsLayout.Padding = value; }
@@ -46,17 +50,14 @@ namespace Trailmaker.UI
 
         public ImageSource ProgressMarker { get; set; }
 
-        public int CurrentPage { get; private set; }
+        public int CurrentPage { get { return controller.CurrentPage; } }
 
-        public int PageCount 
-        {
-            get { return PagesLayout.Children.Count; }
-        }
+        public int PageCount { get { return controller.PageCount; } }
 
         public void SetPages(List<View> pages)
         {
             PagesLayout.Children.Clear();
-            CurrentPage = 0;
+            controller = new WalkthroughController(this, pages);
 
             foreach(var view in pages)
             {
@@ -70,42 +71,12 @@ namespace Trailmaker.UI
 
         private async void Next_Tapped(object sender, System.EventArgs e)
         {
-            await ChangePageForwards();
+            await controller.ChangePageForwards();
         }
 
-		private async void Back_Tapped(object sender, System.EventArgs e)
-		{
-            await ChangePageBackwards();
-		}
-
-        public async Task ChangePageForwards()
+        private async void Back_Tapped(object sender, System.EventArgs e)
         {
-            if (CurrentPage == PageCount - 1 || pageIsChanging)
-            {
-                return;                
-            }
-
-            pageIsChanging = true;
-            CurrentPage++;
-            await RunPageChange(Width * -1);
-            ShowControls();
-            pageIsChanging = false;
-            PageChanged?.Invoke(this, new EventArgs());
-        }
-
-        public async Task ChangePageBackwards()
-        {
-            if (CurrentPage == 0 || pageIsChanging)
-            {
-                return;
-            }
-
-            pageIsChanging = true;
-            CurrentPage--;
-            await RunPageChange(Width);
-            ShowControls();
-            pageIsChanging = false;
-            PageChanged?.Invoke(this, new EventArgs());
+            await controller.ChangePageBackwards();
         }
 
         private async Task RunPageChange(double translationChange)
@@ -118,24 +89,6 @@ namespace Trailmaker.UI
             }
 
             await Task.WhenAll(tasks.ToArray());
-        }
-
-		private void ShowControls()
-        {
-			LabelBack.IsVisible = CurrentPage > 0;
-        	LabelNext.IsVisible = CurrentPage < PagesLayout.Children.Count - 1;
-
-            for (int i = 0; i < LayoutProgress.Children.Count; i++)
-            {
-                if (i == CurrentPage)
-                {
-                    LayoutProgress.Children[i].Opacity = 1;
-                }
-                else
-                {
-                    LayoutProgress.Children[i].Opacity = 0.5;
-				}
-            }
         }
 
 		private void PositionPages()
@@ -176,15 +129,51 @@ namespace Trailmaker.UI
                 case GestureStatus.Completed:
                     if (panX > 0)
                     {
-                        await ChangePageBackwards();
+                        await controller.ChangePageBackwards();
                     }
                     else
                     {
-                        await ChangePageForwards();
+                        await controller.ChangePageForwards();
                     }
 
                     break;
             }
         }
+
+        public async Task ChangePage(bool forwards)
+        {
+            if (forwards)
+            {
+                await RunPageChange(Width * -1);
+            }
+            else
+            {
+                await RunPageChange(Width);
+            }
+
+            ShowControls();
+        }
+
+        private void ShowControls()
+        {
+            LabelBack.IsVisible = userShowBack && controller.BackIsVisible;
+            LabelNext.IsVisible = userShowNext && controller.NextIsVisible;
+            UpdateProgress();
+        }
+
+        private void UpdateProgress()
+		{
+			for (int i = 0; i < LayoutProgress.Children.Count; i++)
+			{
+				if (i == CurrentPage)
+				{
+					LayoutProgress.Children[i].Opacity = 1;
+				}
+				else
+				{
+					LayoutProgress.Children[i].Opacity = 0.5;
+				}
+			}
+		}
     }
 }

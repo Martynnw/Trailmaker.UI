@@ -4,6 +4,6 @@
     xmlns:ui="clr-namespace:Trailmaker.UI;assembly=Trailmaker.UI"
     x:Class="Trailmaker.UI.Demo.Walkthrough.WalkthroughDemoPage">
 	<ContentPage.Content>
-        <ui:Walkthrough x:Name="WalkthroughView" />
+        <ui:Walkthrough x:Name="WalkthroughView" ControlsPadding="10, 20, 10, 20" />
 	</ContentPage.Content>
 </ContentPage>
