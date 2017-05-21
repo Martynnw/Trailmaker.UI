@@ -16,8 +16,8 @@ namespace Trailmaker.UI
         public Walkthrough()
         {
             InitializeComponent();
-            ProgressMarker = ImageSource.FromResource("Trailmaker.UI.Images.circlefull.png");
             PagesLayout.SizeChanged += (sender, e) => { PositionPages(); };
+            ProgressMarker = ImageSource.FromResource("Trailmaker.UI.Images.circlefull.png");
             controller = new WalkthroughController(this, new List<View> { });
             ShowControls();
         }
@@ -56,42 +56,24 @@ namespace Trailmaker.UI
 
         public void SetPages(List<View> pages)
         {
-            PagesLayout.Children.Clear();
             controller = new WalkthroughController(this, pages);
 
-            foreach(var view in pages)
-            {
-                PagesLayout.Children.Add(view);
-            }
-
-            PositionPages();
+            AddPagesToView(pages);
             AddProgress();
             ShowControls();
         }
 
-        private async void Next_Tapped(object sender, System.EventArgs e)
+        private void AddPagesToView(List<View> pages)
         {
-            await controller.ChangePageForwards();
-        }
+            PagesLayout.Children.Clear();
 
-        private async void Back_Tapped(object sender, System.EventArgs e)
-        {
-            await controller.ChangePageBackwards();
-        }
-
-        private async Task RunPageChange(double translationChange)
-        {
-            var tasks = new List<Task>();
-
-            foreach (var view in PagesLayout.Children)
+            foreach (var view in pages)
             {
-                tasks.Add(view.TranslateTo(view.TranslationX + translationChange, 0, easing: Easing.CubicOut));
+                PagesLayout.Children.Add(view);
             }
-
-            await Task.WhenAll(tasks.ToArray());
         }
 
-		private void PositionPages()
+        private void PositionPages()
         {
             var x = 0d;
 
@@ -140,6 +122,28 @@ namespace Trailmaker.UI
             }
         }
 
+		private async void Next_Tapped(object sender, System.EventArgs e)
+		{
+			await controller.ChangePageForwards();
+		}
+
+		private async void Back_Tapped(object sender, System.EventArgs e)
+		{
+			await controller.ChangePageBackwards();
+		}
+
+		private async Task RunPageChange(double translationChange)
+		{
+			var tasks = new List<Task>();
+
+			foreach (var view in PagesLayout.Children)
+			{
+				tasks.Add(view.TranslateTo(view.TranslationX + translationChange, 0, easing: Easing.CubicOut));
+			}
+
+			await Task.WhenAll(tasks.ToArray());
+		}
+
         public async Task ChangePage(bool forwards)
         {
             if (forwards)
@@ -151,6 +155,7 @@ namespace Trailmaker.UI
                 await RunPageChange(Width);
             }
 
+            PageChanged?.Invoke(this, new EventArgs());
             ShowControls();
         }
 
