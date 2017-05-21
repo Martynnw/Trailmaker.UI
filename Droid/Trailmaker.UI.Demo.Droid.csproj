@@ -133,6 +133,10 @@
       <Project>{D37BC9A8-E321-499B-93B6-6395673BBBCF}</Project>
       <Name>Trailmaker.UI.Demo</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Trailmaker.UI\Trailmaker.UI.csproj">
+      <Project>{3F2257BA-4467-4233-81E3-A4442B154A70}</Project>
+      <Name>Trailmaker.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets')" />

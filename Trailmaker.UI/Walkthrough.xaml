@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Trailmaker.UI.Walkthrough" BackgroundColor="#279AF1">
+	<ContentView.Content>
+        <StackLayout Spacing="0">
+            <Grid x:Name="PagesLayout" VerticalOptions="FillAndExpand">
+            </Grid>
+            <StackLayout x:Name="ControlsLayout" Padding="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" /> 
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal" x:Name="LayoutProgress" Spacing="10" HorizontalOptions="Center" Grid.ColumnSpan="2" />
+                    <Label Text="Back" TextColor="#fff" x:Name="LabelBack" HorizontalOptions="StartAndExpand" VerticalTextAlignment="Center" FontSize="Medium">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Back_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Next" Grid.Column="1" TextColor="#fff" x:Name="LabelNext" HorizontalOptions="EndAndExpand" HorizontalTextAlignment="End"  VerticalTextAlignment="Center" FontSize="Medium">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Next_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+	</ContentView.Content>
+    <ContentView.GestureRecognizers>
+        <PanGestureRecognizer PanUpdated="Handle_PanUpdated"/>
+    </ContentView.GestureRecognizers>
+</ContentView>
