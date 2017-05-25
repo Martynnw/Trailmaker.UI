@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             x:Class="Trailmaker.UI.Demo.ShadowPage">
+    <StackLayout>
+        <skia:SKCanvasView PaintSurface="SKCanvasView_PaintSurface" VerticalOptions="FillAndExpand" x:Name="Canvas"/>
+        <Label FontSize="Micro" Text="Offset X" />
+        <Slider Minimum="-100" Maximum="100" Value="0" x:Name="OffsetXSlider" ValueChanged="Slider_ValueChanged"/>
+        <Label FontSize="Micro" Text="Sigma X" />
+        <Slider Minimum="0" Maximum="100" Value="0" x:Name="SigmaXSlider" ValueChanged="Slider_ValueChanged"/>
+        <Label FontSize="Micro" Text="Offset Y" />
+        <Slider Minimum="-100" Maximum="100" Value="0" x:Name="OffsetYSlider" ValueChanged="Slider_ValueChanged"/>
+        <Label FontSize="Micro" Text="Sigma Y" />
+        <Slider Minimum="0" Maximum="100" Value="0" x:Name="SigmaYSlider" ValueChanged="Slider_ValueChanged"/>
+    </StackLayout>
+</ContentPage>

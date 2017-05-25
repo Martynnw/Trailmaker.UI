@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ui="clr-namespace:Trailmaker.UI;assembly=Trailmaker.UI"
+             x:Class="Trailmaker.UI.Demo.TitleBarDemoPage"
+             Title="Real Title Bar">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Item 1" Priority="1" Order="Primary"></ToolbarItem>
+        <ToolbarItem Text="Item 2" Priority="2" Order="Secondary"></ToolbarItem>
+        <ToolbarItem Text="Item 3" Priority="3" Order="Secondary"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout>
+        <ui:TitleBar></ui:TitleBar>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Trailmaker.UI.TitleBar"
+             Orientation="Horizontal"
+             BackgroundColor="Fuchsia"
+             Padding="6, 3, 6, 3">
+    
+    <Label Text="Back" VerticalTextAlignment="Center" FontSize="Medium" />
+    <Label Text="Title"  VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="Large" />
+    
+    
+    <Label Text="Menu"  VerticalTextAlignment="Center" FontSize="Medium">
+        <Label.GestureRecognizers>
+            <TapGestureRecognizer Tapped="MenuTapped" />
+        </Label.GestureRecognizers>
+    </Label>
+    
+</StackLayout>
